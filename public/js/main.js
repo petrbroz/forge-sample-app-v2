@@ -14,7 +14,7 @@ function initializeViewer(urn) {
     };
     Autodesk.Viewing.Initializer(options, () => {
         app = new Autodesk.Viewing.ViewingApplication('viewer');
-        app.registerViewer(app.k3D, Autodesk.Viewing.Private.GuiViewer3D);
+        app.registerViewer(app.k3D, Autodesk.Viewing.Private.GuiViewer3D, { extensions: ['AwesomeExtension'] });
         app.loadDocument('urn:' + urn, onDocumentLoadSuccess, onDocumentLoadError);
     });
 }
