@@ -7,7 +7,7 @@ const { getClient, getInternalToken } = require('./common/oauth');
 
 let router = express.Router();
 
-// Middleware for obtaining a token for each request
+// Middleware for obtaining a token for each request.
 router.use(async (req, res, next) => {
     const token = await getInternalToken();
     req.oauth_token = token;
@@ -15,6 +15,7 @@ router.use(async (req, res, next) => {
     next();
 });
 
+// GET /api/buckets - returns JSON with list of buckets.
 router.get('/', async (req, res, next) => {
     const buckets = await new BucketsApi().getBuckets({ limit: 64 }, req.oauth_client, req.oauth_token);
     res.json(buckets.body.items.map((bucket) => {
@@ -27,6 +28,7 @@ router.get('/', async (req, res, next) => {
     }));
 });
 
+// GET /api/buckets/<bucket_id> - returns JSON with list of objects in bucket <bucket_id>.
 router.get('/:bucket_id', async (req, res, next) => {
     const objects = await new ObjectsApi().getObjects(req.params.bucket_id, {}, req.oauth_client, req.oauth_token);
     res.json(objects.body.items.map((object) => {
@@ -39,6 +41,8 @@ router.get('/:bucket_id', async (req, res, next) => {
     }));
 });
 
+// POST /api/buckets - creates a new bucket.
+// Request body must be a valid JSON in the form of { "bucketKey": "<new_bucket_name>" }.
 router.post('/', async (req, res, next) => {
     let payload = new PostBucketsPayload();
     payload.bucketKey = req.body.bucketKey;
@@ -51,8 +55,9 @@ router.post('/', async (req, res, next) => {
     }
 });
 
-let upload = multer({ dest: 'uploads/' });
-router.post('/:bucket_id', upload.single('document'), async (req, res, next) => {
+// POST /api/buckets/<bucket_id> - uploads new object to bucket <bucket_id>.
+// Request body must be 'form-data' with the uploaded file mapped to "document" key.
+router.post('/:bucket_id', multer({ dest: 'uploads/' }).single('document'), async (req, res, next) => {
     fs.readFile(req.file.path, async (err, data) => {
         if (err) {
             next(err);

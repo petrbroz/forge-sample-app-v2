@@ -4,8 +4,7 @@ const { getPublicToken } = require('./common/oauth');
 
 let router = express.Router();
 
-// GET /api/auth/token
-// Returns a public access token required by the Forge viewer.
+// GET /api/auth/token - generates a public access token (required by the Forge viewer).
 router.get('/token', async (req, res, next) => {
     try {
         const token = await getPublicToken();

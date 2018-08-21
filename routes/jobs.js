@@ -11,7 +11,7 @@ const { getClient, getInternalToken } = require('./common/oauth');
 
 let router = express.Router();
 
-// Middleware for obtaining a token for each request
+// Middleware for obtaining a token for each request.
 router.use(async (req, res, next) => {
     const token = await getInternalToken();
     req.oauth_token = token;
@@ -19,8 +19,8 @@ router.use(async (req, res, next) => {
     next();
 });
 
-// POST /api/jobs
-// Submits a new translation job for document urn provided in the request body as `{ "urn": "<document-urn>" }`.
+// POST /api/jobs - submits a new translation job for given object URN.
+// Request body must be a valid JSON in the form of { "urn": "<translated-object-urn>" }.
 router.post('/', async (req, res, next) => {
     let job = new JobPayload();
     job.input = new JobPayloadInput();
