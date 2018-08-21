@@ -2,7 +2,7 @@
   "name": "learn-forge-test-app-v2",
   "version": "0.0.0",
   "description": "Test application based on the learnforge.autodesk.io tutorial.",
-  "main": "index.js",
+  "main": "start.js",
   "scripts": {},
   "author": "Petr Broz <petr.broz@autodesk.com>",
   "license": "MIT",
