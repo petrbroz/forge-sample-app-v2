@@ -4,7 +4,7 @@ function initializeViewer(urn) {
     const options = {
         env: 'AutodeskProduction',
         getAccessToken: (callback) => {
-            fetch('/api/auth/token')
+            fetch('/api/forge/oauth/token')
                 .then((response) => response.json())
                 .then((json) => {
                     console.log('Access token received', json);
