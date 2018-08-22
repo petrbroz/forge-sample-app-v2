@@ -52,8 +52,8 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
             <div class="warning">
                 You can browse your Forge buckets and objects/documents
-                via <code>${document.location}api/buckets</code>
-                and <code>${document.location}api/buckets/<em>your-bucket-name</em></code>.
+                via <code>${document.location}api/forge/oss/buckets?id=#</code>
+                or <code>${document.location}api/forge/oss/buckets?id=<em>your-bucket-name</em></code>.
             </div>
         `;
     }
