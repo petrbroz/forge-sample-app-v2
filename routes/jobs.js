@@ -19,12 +19,12 @@ router.use(async (req, res, next) => {
     next();
 });
 
-// POST /api/jobs - submits a new translation job for given object URN.
-// Request body must be a valid JSON in the form of { "urn": "<translated-object-urn>" }.
-router.post('/', async (req, res, next) => {
+// POST /api/forge/modelderivative/jobs - submits a new translation job for given object URN.
+// Request body must be a valid JSON in the form of { "objectName": "<translated-object-urn>" }.
+router.post('/jobs', async (req, res, next) => {
     let job = new JobPayload();
     job.input = new JobPayloadInput();
-    job.input.urn = req.body.urn;
+    job.input.urn = req.body.objectName;
     job.output = new JobPayloadOutput([
         new JobSvfOutputPayload()
     ]);

@@ -13,5 +13,5 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json({ limit: '50mb' }));
 app.use('/api/forge/oauth', require('./routes/auth'));
 app.use('/api/forge/oss', require('./routes/oss'));
-app.use('/api/jobs', require('./routes/jobs'));
+app.use('/api/forge/modelderivative', require('./routes/jobs'));
 app.listen(PORT, () => { console.log(`Server listening on port ${PORT}`); });
