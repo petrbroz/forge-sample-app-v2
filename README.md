@@ -24,7 +24,7 @@ fat arrow functions, destructuring, and promises
                     "type": "node",
                     "request": "launch",
                     "name": "Launch Program",
-                    "program": "${workspaceFolder}/server.js",
+                    "program": "${workspaceFolder}/start.js",
                     "env": {
                         "DEBUG": "express:*",
                         "FORGE_CLIENT_ID": "<your-client-id>",
